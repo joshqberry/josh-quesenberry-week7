@@ -1,0 +1,55 @@
+
+There will be three parts to this.
+Rails/View stories
+Capybara testing.
+Developer Workflow / Git.
+
+Github
+Remember to commit clearly and frequently.
+
+
+Data Model
+- Users have
+  - user_name, string.
+  - password_digest, string.
+  - about, string.
+
+- Courses have
+  - title, string.
+  - day/night, boolean. (it either happens as a night class or day class)
+
+Rails View Stories
+
+Application layout should have login link if no current user and logout link if there is a current user.
+
+
+
+2. Authentication for Users
+    - login page
+
+Login page:
+
+user_name:
+password:
+Login
+
+Courses Index Page
+
+Title           | day or night
+statistics 101  | Day            | Delete Course
+programming 101 | Night          | Delete Course
+
+Courses Show Page
+
+Title: title
+Day or Night: night
+
+Capybara Stories
+
+User Authentication
+
+Test valid users can log in.
+
+Courses Crud
+
+Test that users can CRUD courses.
