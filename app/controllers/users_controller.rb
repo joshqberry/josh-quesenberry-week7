@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  
-
 
 
   def index
@@ -22,8 +20,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
           if @user.save
-            redirect_to users_path
+            log_in(@user)
+            flash[:success] = "You're in, newb!"
+            redirect_to @user
           else
+            flash[:danger] = "You're not in, newb!"
             render 'users/new'
           end
   end
@@ -46,7 +47,8 @@ class UsersController < ApplicationController
   private
 
 def user_params
-      params.require(:user).permit(:user_name, :about)
+      params.require(:user).permit(:user_name, :about, :password,
+                                   :password_confirmation)
     end
 
 end

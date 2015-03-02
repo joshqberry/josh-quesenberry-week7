@@ -8,7 +8,25 @@
 </head>
 <body>
 
+
+
+  <% if logged_in? %>
+  <%= link_to "Log out", logout_path, method: "delete" %>
+  <% else %>
+  Log in <%= link_to "here", login_path %> or register as a <%= link_to "new", new_user_path %> user.
+
+  <% end %>
+  <br>
+  <br>
+
+<div class="container">
+  <% flash.each do |key, value| %>
+          <h3><div class="alert alert-<%= key %>"><%= value %></div></h3>
+        <% end %>
+
 <%= yield %>
+
+</div>
 
 </body>
 </html>

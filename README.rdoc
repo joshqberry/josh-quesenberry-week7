@@ -53,3 +53,17 @@ Test valid users can log in.
 Courses Crud
 
 Test that users can CRUD courses.
+
+
+
+
+SO PEOPLE CAN STILL GO TO WHATEVER PAGE BY TYPING IN URL, DO I NEED TO FIX?
+
+before_action :authenticate
+
+private
+def authenticate
+unless current_user
+  redirect_to ‘/login'
+end
+end
