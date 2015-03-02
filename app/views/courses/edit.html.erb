@@ -1,0 +1,16 @@
+<h1>Edit a course</h1>
+
+<%= form_for(@course) do |f| %>
+
+<%= f.label :title %>
+<%= f.text_field :title %>
+<br>
+<br>
+<%= f.label :day_or_night, "Click here if this course is at night:" %>
+<%= f.check_box :day_or_night %>
+<br>
+<br>
+
+<%= f.submit "Update your course" %>
+
+<% end %>

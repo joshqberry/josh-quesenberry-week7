@@ -1,10 +1,11 @@
-<h1>All of a specific user's courses</h1>
+<h1>All available courses</h1>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Day or night?</th>
+      <th>Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      <th>Is this course at night?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      <th>Delete course</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,14 +13,15 @@
 
   <tbody>
 
-
-
     <% @courses.each do |course| %>
       <tr>
-        <td><%= course.title %></td>
+        <td><%= course.title %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td><%= course.day_or_night %></td>
-      </tr>
 
+      <td style="text-right"><%= link_to 'Destroy', course, class: "btn btn-danger", method: :delete, data:
+            { confirm: 'Are you sure?' } %><td>
+
+          </tr>
 </tbody>
 
 <% end %>

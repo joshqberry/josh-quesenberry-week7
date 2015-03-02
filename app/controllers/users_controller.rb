@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @courses = Course.all
   end
 
   def edit
@@ -39,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.new(user_params)
+    @user = User.find(params[:id])
     @user.destroy
   end
 
@@ -47,8 +48,7 @@ class UsersController < ApplicationController
   private
 
 def user_params
-      params.require(:user).permit(:user_name, :about, :password,
-                                   :password_confirmation)
+      params.require(:user).permit(:user_name, :about, :password, :password_confirmation)
     end
 
 end
