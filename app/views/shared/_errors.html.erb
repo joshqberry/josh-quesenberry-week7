@@ -2,15 +2,15 @@
 
 <div id="error_explanation">
 
-  <div class="alert alert-danger">
-      Hey newb, this form has <%= pluralize(@user.errors.count, "error") %>!
-  </div>
+<div class="alert alert-danger">
+    Hey newb, this form has <%= pluralize(@user.errors.count, "error") %>!
+</div>
 
-  <ul>
+<ul>
     <% @user.errors.full_messages.each do |dumbass| %>
-      <li><%= dumbass %>
+<li><%= dumbass %>
     <% end %>
-  </ul>
+</ul>
 
 </div>
 

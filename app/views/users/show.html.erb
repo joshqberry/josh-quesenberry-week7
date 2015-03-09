@@ -1,34 +1,41 @@
 <h1><%= @user.user_name %></h1>
 
-
-
 <h3>About you: </h3><%= @user.about %>
 
 <br>
 <br>
+
 <hr>
+
 <h2>Hey <%= @user.user_name %>, these are your courses:</h2>
+
 <br>
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-      <th>Day or night?</th>
+      <th>Day course or night course?</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
-
   <tbody>
-
-
 
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.title %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td><%= course.day_or_night %></td>
+        <% if course.day_or_night? %>
+        <td><%= "night" %></td>
+        <% else %>
+        <td><%= "day" %></td>
+        <% end %>
+        <td style="text-right"><%= link_to 'Delete course from schedule', course, class: "btn btn-danger", method: :delete, data:
+              { confirm: 'Are you sure?' } %><td>
       </tr>
 
-</tbody>
+  </tbody>
 
 <% end %>
+
+</table>

@@ -1,7 +1,7 @@
+<br>
 <% if !logged_in? %>
 If you've already registered, <%= link_to "click here", login_path %> to log in.
 <% end %>
-
 
 <h1>Please register! </h1>
 
@@ -21,6 +21,6 @@ If you've already registered, <%= link_to "click here", login_path %> to log in.
 <%= f.label :password_confirmation %>
 <%= f.password_field :password_confirmation %>
 
-<%= f.submit "Hey homeboy, Create new user" %>
+<%= f.submit "Create new user" %>
 
 <% end %>

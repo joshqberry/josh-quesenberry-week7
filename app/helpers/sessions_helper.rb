@@ -1,26 +1,29 @@
 module SessionsHelper
 
-def log_in(user)
-  session[:user_id] = user.id
-end
-
-
-def current_user
-    if session[:user_id]
-      @current_user = @current_user || User.find_by(id: session[:user_id])
-    end
-    end
-
-
-  def logged_in?
-    !current_user.nil?
+  def log_in(user)
+      session[:user_id] = user.id
   end
 
-def log_out
-    session.delete(:user_id)
-    @current_user = nil
-    flash[:success] = "Logged out!"
-    redirect_to login_path
+  def current_user
+      if session[:user_id]
+        @current_user = @current_user || User.find_by(id: session[:user_id])
+      end
+  end
+
+  def logged_in?
+      !current_user.nil?
+  end
+
+  def log_out
+      session.delete(:user_id)
+      @current_user = nil
+      flash[:success] = "Logged out!"
+      redirect_to login_path
+  end
+
+  def correct_user?
+      @user = User.find(params[:id])
+      @user == current_user
   end
 
 end

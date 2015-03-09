@@ -1,27 +1,27 @@
 <h1>All available courses</h1>
 
 <table class="table table-striped">
+
   <thead>
     <tr>
       <th>Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-      <th>Is this course at night?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-      <th>Delete course</th>
+      <th>Day course or night course?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
-
   <tbody>
-
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.title %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td><%= course.day_or_night %></td>
-
-      <td style="text-right"><%= link_to 'Destroy', course, class: "btn btn-danger", method: :delete, data:
-            { confirm: 'Are you sure?' } %><td>
-
-          </tr>
-</tbody>
+        <% if course.day_or_night? %>
+        <td><%= "night" %></td>
+        <% else %>
+        <td><%= "day" %></td>
+        <% end %>
+      </tr>
+  </tbody>
 
 <% end %>
+
+</table>

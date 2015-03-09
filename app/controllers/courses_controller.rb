@@ -19,43 +19,35 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(course_params)
     @user = User.find_by(id: session[:user_id])
-            if @user == nil
-            flash[:danger] = "You're blocked from this class, newb! (You have to sign in first.)"
-            redirect_to login_path
-          else
-            @course.save
-              redirect_to @user
+  if @user.courses.create(course_params)
+    flash[:success] = "You have successfully added a course to your schedule."
+    redirect_to @user
+        else
+          render :new
+
   end
 end
 
 
 
   def update
-      @course = Course.new(course_params)
-      @user = User.find_by(id: session[:user_id])
-          if @user == nil
-            flash[:danger] = "Hey newb, you have to sign in before you can change class details."
-            redirect_to login_path
-          else
-              @course.update_attributes(course_params)
-              flash[:success] = "You have successfully updated class details."
+    @course = Course.find(params[:id])
+      if @course.update_attributes(course_params)
+              flash[:success] = "You have successfully updated course details."
               redirect_to courses_path
-
+            else
+              flash[:danger] = "Course details were not updated."
+              render 'courses/edit'
     end
   end
 
   def destroy
-    @course = Course.find(params[:id])
     @user = User.find_by(id: session[:user_id])
-        if @user == nil
-          flash[:danger] = "Hey newb, you can't delete a class unless you've signed in."
-          redirect_to login_path
-        else
+    @course = Course.find(params[:id])
     @course.destroy
-    redirect_to courses_path, notice: 'That class is no more. It has ceased to be.'
-  end
+    redirect_to @user, notice: 'That course is no more. It has ceased to be.'
+
 end
 
 

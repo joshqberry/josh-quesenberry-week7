@@ -7,17 +7,33 @@ class UsersController < ApplicationController
   end
 
   def new
+    if logged_in?
+      user = @current_user
+      flash[:danger] = "Uh, sorry, you can't create a new account. You've already got one."
+      redirect_to user_path(user)
+    else
     @user = User.new
   end
+end
 
   def show
+    if !correct_user?
+    flash[:danger] = "Sorry, you're not allowed to see another student's schedule."
+    redirect_to user_path(@current_user)
+    else
     @user = User.find(params[:id])
-    @courses = Course.all
-  end
+    @courses = @user.courses.all
+end
+end
 
   def edit
+    if !correct_user?
+    flash[:danger] = "Sorry, you're not allowed to edit another student's schedule."
+    redirect_to user_path(@current_user)
+  else
     @user = User.find(params[:id])
   end
+end
 
   def create
 
@@ -33,17 +49,13 @@ class UsersController < ApplicationController
   end
 end
 
-
-
-
-
   def update
     @user = User.find(params[:id])
           if @user.update_attributes(user_params)
             flash[:success] = "User information has been updated."
-            redirect_to users_path
+            redirect_to user_path(@user)
           else
-            flash[:success] = "User information was not updated."
+            flash[:danger] = "User information was not updated."
             render 'users/edit'
           end
   end
