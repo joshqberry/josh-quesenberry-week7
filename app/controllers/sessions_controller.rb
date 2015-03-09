@@ -1,8 +1,12 @@
 class SessionsController < ApplicationController
 
   def new
-    @user = User.new
+    if logged_in?
+      user = @current_user
+      flash[:danger] = "You're already logged in. No need to log in again."
+      redirect_to user_path(user)
   end
+end
 
   def create
     user = User.find_by(user_name: params[:session][:user_name].downcase)
@@ -15,18 +19,16 @@ class SessionsController < ApplicationController
      redirect_to user_path(user)
 
    else
-     flash[:danger] = 'Invalid email/password combination, jackass!'
-     redirect_to login_path
+     flash.now[:danger] = 'Invalid email/password combination, jackass!'
+     render :new
    end
 
   end
 
+
+
   def destroy
     log_out
-
-
-
-    redirect_to login_path
   end
 
 end

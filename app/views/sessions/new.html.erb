@@ -1,3 +1,9 @@
+<br>
+<% if !logged_in? %>
+This page is for registered users to log in. To register, <%= link_to "click here.", signup_path %>
+<% end %>
+
+
 <h1>Log in</h1>
 
     <%= form_for(:session, url: login_path) do |f| %>

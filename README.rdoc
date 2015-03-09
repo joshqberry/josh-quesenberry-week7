@@ -11,26 +11,27 @@ Remember to commit clearly and frequently.
 
 
 
+2. Authentication for Users
+    - login page
+
 Capybara Stories
 
-
 Test valid users can log in.
-
-
 Test that users can CRUD courses.
 
 
 
 
-SO PEOPLE CAN STILL GO TO WHATEVER PAGE BY TYPING IN URL, DO I NEED TO FIX?
 
-before_action :authenticate
 
-private
-def authenticate
-unless current_user
-  redirect_to ‘/login'
-end
-end
 
-NON LOGGED IN USER CAN'T CREATE NEW CLASS, CAN DESTROY,
+@current_user != nil
+    flash[:danger] = "Uh, sorry, you can't create a new account. You've already got one."
+    redirect_to @user
+
+
+
+NON LOGGED IN USER CAN STILL ACCESS SHIT THROUGH TERMINAL, BUT I DON'T THAT THAT WAS REQUIRED?
+
+Block users from being able to create new users.
+Course needs to be day night, not true false.

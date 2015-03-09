@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate
 
 
   def index
@@ -19,25 +20,35 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-          if @user.save
-            log_in(@user)
-            flash[:success] = "You're in, newb!"
-            redirect_to @user
+
+      @user = User.new(user_params)
+
+    if
+        @user.save
+        session[:user_id] = @user.id
+        flash[:success] = "You're in, newb!"
+        redirect_to @user
+    else
+      render :new
+  end
+end
+
+
+
+
+
+  def update
+    @user = User.find(params[:id])
+          if @user.update_attributes(user_params)
+            flash[:success] = "User information has been updated."
+            redirect_to users_path
           else
-            flash[:danger] = "You're not in, newb!"
-            render 'users/new'
+            flash[:success] = "User information was not updated."
+            render 'users/edit'
           end
   end
 
-  def update
-    @user = User.new(user_params)
-          if @user.update
-            redirect_to users_path
-          else
-            render 'users/update'
-          end
-  end
+
 
   def destroy
     @user = User.find(params[:id])

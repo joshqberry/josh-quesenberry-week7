@@ -1,1 +1,6 @@
+<% if !logged_in? %>
+You are not logged in. Log in <%= link_to "here", login_path %> or register as a
+<%= link_to "new user.", signup_path %>
+<% end %>
+
 <h1>Welcome to school, newbs!</h1>

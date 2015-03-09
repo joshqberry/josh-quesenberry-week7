@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_action :authenticate
 
 
   def index
@@ -30,6 +31,7 @@ class CoursesController < ApplicationController
 end
 
 
+
   def update
       @course = Course.new(course_params)
       @user = User.find_by(id: session[:user_id])
@@ -37,8 +39,8 @@ end
             flash[:danger] = "Hey newb, you have to sign in before you can change class details."
             redirect_to login_path
           else
-              @course.update
-              flash[:success] = "You have successfully changed class details."
+              @course.update_attributes(course_params)
+              flash[:success] = "You have successfully updated class details."
               redirect_to courses_path
 
     end
