@@ -13,7 +13,7 @@
   <tbody>
     <% @courses.each do |course| %>
       <tr>
-        <td><%= course.title %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td><%= link_to course.title, course_path(course) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <% if course.day_or_night? %>
         <td><%= "night" %></td>
         <% else %>
